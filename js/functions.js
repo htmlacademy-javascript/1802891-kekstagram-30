@@ -1,5 +1,4 @@
-const cheakingLengthString = (string, length) =>
-  string.length <= length ? true : false;
+const cheakingLengthString = (string, length) => string.length <= length;
 
 const checkingPalindrome = function (line) {
   const normalizeString = line.toLowerCase().replaceAll(' ', '');
@@ -7,7 +6,7 @@ const checkingPalindrome = function (line) {
   for(let i = normalizeString.length - 1; i >= 0; i--) {
     comparisonString += normalizeString[i].at();
   }
-  return (normalizeString === comparisonString) ? true : false;
+  return normalizeString === comparisonString;
 };
 
 const findingNumbers = function (string) {
