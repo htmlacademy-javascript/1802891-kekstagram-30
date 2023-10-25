@@ -1,5 +1,4 @@
 import {getRandomElementFromArray, getRandomInteger} from './utils.js';
-
 const MIN_LIKES = 15;
 const MAX_LIKES = 200;
 
@@ -17,7 +16,7 @@ const MESSAGE = [
   'Всё отлично!',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра.',
 ];
-/*
+/**
  * функция для создания комментариев под фотографией
  * @param {number} — количество комментариев
  * @return {array} — возвращает массив комментариев
@@ -34,12 +33,12 @@ const createCommentsFromPhotos = (quantityPhotos) => {
   }
   return commentsData;
 };
-/*
+/**
  * функция для создания рандомной фотографии с рандомным комментарием
  * @param {numbers|numbers} — кол-во фотографий и кол-во комментариев
  * @return {array} — возвращает массив фотографий
 */
-const createPhotos = (numberOfPotos, numberComments) => {
+const createPhotos = (numberOfPotos, numberComments = 5) => {
   const photos = [];
   for (let i = 1; i <= numberOfPotos; i++) {
     photos.push({
@@ -53,5 +52,4 @@ const createPhotos = (numberOfPotos, numberComments) => {
   return photos;
 };
 
-const photoData = createPhotos;
-export {photoData};
+export {createPhotos};

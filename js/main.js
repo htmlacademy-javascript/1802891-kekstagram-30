@@ -1,3 +1,1 @@
-import {photoData} from './data.js';
-console.log(photoData(25, 5));
-
+import {createPhotos} from './data.js';
