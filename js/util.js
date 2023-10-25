@@ -51,38 +51,38 @@ const getRandomInteger = (a, b) => {
  * функция для возвращение рандомного значения из массива
  * @param {array} — массив с данными
  * @return {array} — возвращает рандомный элемент из массива
-*/
+ */
 const getRandomElementFromArray = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-export {getRandomInteger, getRandomElementFromArray};
-
-const calculatingTimeForMeeting = (beginningDay, endOfDay, beginningOfMeeting, durationOfMeeting) =>{
+/**
+ * функция для проверки возможности встречи
+ * @param {stirng | number} — время начала дня, время окончание дня, время начала мероприятия, продолжительности меропрития
+ * @return {boolean} — возвращает рандомный элемент из массива
+ */
+const calculatingTimeForMeeting = (beginningDay, endOfDay, beginningOfMeeting, durationOfMeeting) => {
   const timeСonversion = (time) => {
     time.toString();
     let timeValue = '';
     for (let i = 0; i <= time.length - 1; i++) {
       if (time[i] === ':') {
         timeValue += time[i].replace(':', '.');
-      } else if (!(time[0] === '0')) {
-        timeValue += time[i];
       } else {
         timeValue += time[i + 1];
       }
     }
     return parseFloat(timeValue);
   };
-  const time = parseFloat(durationOfMeeting / 60);
+  const timeMeeting = parseFloat(durationOfMeeting / 60);
   const startDay = timeСonversion(beginningDay);
   const endDay = timeСonversion(endOfDay);
   const startMeeting = timeСonversion(beginningOfMeeting);
   if (startDay > startMeeting) {
     return false;
 
-  } else if ((startMeeting + time) > endDay){
+  } else if ((startMeeting + timeMeeting) > endDay) {
     return false;
   }
   return true;
-
 };
 
-console.log(calculatingTimeForMeeting(8, 17.30, 14.00, 90));
+export {getRandomInteger, getRandomElementFromArray};

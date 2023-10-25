@@ -23,7 +23,7 @@ const MESSAGE = [
 */
 const createCommentsFromPhotos = (quantityPhotos) => {
   const commentsData = [];
-  for (let i = 0; i < quantityPhotos; i++){
+  for (let i = 0; i < quantityPhotos; i++) {
     commentsData.push({
       id: i,
       avatar: `img/avatar-${getRandomInteger(1,6)}.svg`,
