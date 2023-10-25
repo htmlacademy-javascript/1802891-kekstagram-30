@@ -1,4 +1,5 @@
-import {getRandomElementFromArray, getRandomInteger} from './utils.js';
+import {getRandomInteger, getRandomElementFromArray} from './util.js';
+
 const MIN_LIKES = 15;
 const MAX_LIKES = 200;
 
@@ -26,7 +27,7 @@ const createCommentsFromPhotos = (quantityPhotos) => {
   for (let i = 0; i < quantityPhotos; i++){
     commentsData.push({
       id: i,
-      avatar: 'img/avatar-${getRandomInteger(1,6)}.svg',
+      avatar: `img/avatar-${getRandomInteger(1,6)}.svg`,
       message: getRandomElementFromArray(MESSAGE),
       name: getRandomElementFromArray(NAMES),
     });

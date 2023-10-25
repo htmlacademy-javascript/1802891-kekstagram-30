@@ -27,8 +27,8 @@ const isPalindrome = (rawString) => {
 const findNumbersAtString = (string) => {
   const value = string.toString();
   let result = '';
-  for (let i = 0; i < value.length; i++){
-    if (!(isNaN(parseInt(value[i], 10)))){
+  for (let i = 0; i < value.length; i++) {
+    if (!(isNaN(parseInt(value[i], 10)))) {
       result += value[i];
     }
   }
@@ -39,7 +39,7 @@ const findNumbersAtString = (string) => {
  * функция для создания рандомного числа
  * @param {numbers|numbers} — минимальное значение массива и максимальное значение массива
  * @return {array} — возвращает рандомный число
-*/
+ */
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -63,7 +63,7 @@ const calculatingTimeForMeeting = (beginningDay, endOfDay, beginningOfMeeting, d
     for (let i = 0; i <= time.length - 1; i++) {
       if (time[i] === ':') {
         timeValue += time[i].replace(':', '.');
-      } else if (!(time[0] === '0')){
+      } else if (!(time[0] === '0')) {
         timeValue += time[i];
       } else {
         timeValue += time[i + 1];
@@ -75,7 +75,7 @@ const calculatingTimeForMeeting = (beginningDay, endOfDay, beginningOfMeeting, d
   const startDay = timeСonversion(beginningDay);
   const endDay = timeСonversion(endOfDay);
   const startMeeting = timeСonversion(beginningOfMeeting);
-  if (startDay > startMeeting){
+  if (startDay > startMeeting) {
     return false;
 
   } else if ((startMeeting + time) > endDay){
