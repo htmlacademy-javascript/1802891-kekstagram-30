@@ -55,3 +55,34 @@ const getRandomInteger = (a, b) => {
 const getRandomElementFromArray = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 export {getRandomInteger, getRandomElementFromArray};
+
+const calculatingTimeForMeeting = (beginningDay, endOfDay, beginningOfMeeting, durationOfMeeting) =>{
+  const timeСonversion = (time) => {
+    time.toString();
+    let timeValue = '';
+    for (let i = 0; i <= time.length - 1; i++) {
+      if (time[i] === ':') {
+        timeValue += time[i].replace(':', '.');
+      } else if (!(time[0] === '0')){
+        timeValue += time[i];
+      } else {
+        timeValue += time[i + 1];
+      }
+    }
+    return parseFloat(timeValue);
+  };
+  const time = parseFloat(durationOfMeeting / 60);
+  const startDay = timeСonversion(beginningDay);
+  const endDay = timeСonversion(endOfDay);
+  const startMeeting = timeСonversion(beginningOfMeeting);
+  if (startDay > startMeeting){
+    return false;
+
+  } else if ((startMeeting + time) > endDay){
+    return false;
+  }
+  return true;
+
+};
+
+console.log(calculatingTimeForMeeting(8, 17.30, 14.00, 90));
