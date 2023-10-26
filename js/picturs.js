@@ -16,3 +16,4 @@ createPhotos(25, 6).forEach(({url,description,likes,comments}) =>{
 
 // Добавил фотографии на страницу
 listPucters.append(pictursListFragment);
+

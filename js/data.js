@@ -1,4 +1,5 @@
-import {getRandomInteger, getRandomElementFromArray} from './util.js';
+import {getRandomInteger, getRandomElementFromArray} from './utils.js';
+
 const MIN_LIKES = 15;
 const MAX_LIKES = 200;
 
@@ -35,10 +36,10 @@ const createCommentsFromPhotos = (quantityPhotos) => {
 };
 /**
  * функция для создания рандомной фотографии с рандомным комментарием
- * @param {numbers|numbers} — кол-во фотографий и кол-во комментариев
+ * @param {numbers} — кол-во фотографий
  * @return {array} — возвращает массив фотографий
 */
-const createPhotos = (numberOfPotos, numberComments = 5) => {
+const createPhotos = (numberOfPotos = 25) => {
   const photos = [];
   for (let i = 1; i <= numberOfPotos; i++) {
     photos.push({
@@ -46,7 +47,7 @@ const createPhotos = (numberOfPotos, numberComments = 5) => {
       url: `photos/${i}.jpg`,
       description:  getRandomElementFromArray(DESCRIPTION_PHOTO),
       likes: getRandomInteger(MIN_LIKES, MAX_LIKES),
-      comments: createCommentsFromPhotos(numberComments),
+      comments: createCommentsFromPhotos(getRandomInteger(1, 10)),
     });
   }
   return photos;
