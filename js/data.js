@@ -2,6 +2,8 @@ import {getRandomInteger, getRandomElementFromArray} from './utils.js';
 
 const MIN_LIKES = 15;
 const MAX_LIKES = 200;
+const MIN_COMMENTS = 1;
+const MAX_COMMENTS = 25;
 
 const NAMES = [
   'Иван','Хуан Себастьян','Мария','Кристоф','Виктор','Юлия','Люпита','Вашингтон',
@@ -49,7 +51,7 @@ const createPhotos = (numberOfPotos = 25) => {
       url: `photos/${i}.jpg`,
       description:  getRandomElementFromArray(DESCRIPTION_PHOTO),
       likes: getRandomInteger(MIN_LIKES, MAX_LIKES),
-      comments: createCommentsFromPhotos(getRandomInteger(1, 10)),
+      comments: createCommentsFromPhotos(getRandomInteger(MIN_COMMENTS, MAX_COMMENTS)),
     });
   }
   return photos;
