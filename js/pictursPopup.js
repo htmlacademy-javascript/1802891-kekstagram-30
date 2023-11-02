@@ -6,6 +6,8 @@ const bigPictureClose = bigPicture.querySelector('.big-picture__cancel');
 const socialCommentCount = bigPicture.querySelector('.social__comment-count');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
 
+
+socialСomments.innerHTML = '';
 /**
  * функция для добавления комментариев к фотографии
  * @param {arry} — массив данных комментариев
@@ -53,12 +55,14 @@ const show = (picture, comments) => {
 bigPictureClose.addEventListener('click', () => {
   bigPicture.classList.add('hidden');
   body.classList.remove('.modal-open');
+  socialСomments.innerHTML = '';
 });
 
 window.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {
     bigPicture.classList.add('hidden');
     body.classList.remove('.modal-open');
+    socialСomments.innerHTML = '';
   }
 });
 
