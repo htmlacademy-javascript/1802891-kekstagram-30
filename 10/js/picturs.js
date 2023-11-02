@@ -1,4 +1,4 @@
-import {show} from './pictursPopup';
+import {show} from './pictursPopup.js';
 const picturesContainer = document.querySelector('.pictures');
 const picturTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
