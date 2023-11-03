@@ -1,31 +1,28 @@
-import {show} from './pictursPopup.js';
+import {show} from './picturs-popup.js';
 const picturesContainer = document.querySelector('.pictures');
-const picturTemplate = document.querySelector('#picture').content.querySelector('.picture');
+const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-const COUNT_PICTURE = 25;
-
-const pictursListFragment = document.createDocumentFragment();
+const picturesListFragment = document.createDocumentFragment();
 // Создание рандомной карточки с фотографиями и добавление её в контейнер
 
 /**
  * функция для добавления фотграфий на страницу
  * @param {void} — функция с данными фотографий
  */
-const createElementPhotos = (dataPicters) => {
-  dataPicters(COUNT_PICTURE).forEach((dataPicture) => {
-    const pictureElement = picturTemplate.cloneNode(true);
+const createElementPhotos = (dataPictures) => {
+  dataPictures.forEach((dataPicture) => {
+    const pictureElement = pictureTemplate.cloneNode(true);
     pictureElement.querySelector('.picture__img').src = dataPicture.url;
-    pictureElement.alt = dataPicture.description;
+    pictureElement.querySelector('.picture__img').alt = dataPicture.description;
     pictureElement.querySelector('.picture__likes').textContent = dataPicture.likes;
     pictureElement.querySelector('.picture__comments').textContent = dataPicture.comments.length;
     pictureElement.addEventListener('click', (evt) => {
       evt.preventDefault();
-      show(dataPicture, dataPicture.comments);
+      show(dataPicture);
     });
-    //console.log(show(dataPicters));
-    pictursListFragment.append(pictureElement);
+    picturesListFragment.append(pictureElement);
   });
-  picturesContainer.append(pictursListFragment);
+  picturesContainer.append(picturesListFragment);
 };
 
 export {createElementPhotos};
