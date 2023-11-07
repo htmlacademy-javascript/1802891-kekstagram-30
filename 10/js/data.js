@@ -2,8 +2,11 @@ import {getRandomInteger, getRandomElementFromArray} from './utils.js';
 
 const MIN_LIKES = 15;
 const MAX_LIKES = 200;
+
 const MIN_COMMENTS = 1;
 const MAX_COMMENTS = 25;
+
+const COUNT_PICTURE = 25;
 
 const NAMES = [
   'Иван','Хуан Себастьян','Мария','Кристоф','Виктор','Юлия','Люпита','Вашингтон',
@@ -57,4 +60,4 @@ const createPhotos = (numberOfPotos = 25) => {
   return photos;
 };
 
-export {createPhotos};
+export {createPhotos, COUNT_PICTURE};
