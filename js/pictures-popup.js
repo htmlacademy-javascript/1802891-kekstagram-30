@@ -71,7 +71,7 @@ window.addEventListener('keydown', (evt) => {
   }
 });
 
-const onCommentsLoaderClick = renderComments;
+const onCommentsLoaderClick = () => renderComments();
 
 commentsLoader.addEventListener('click', onCommentsLoaderClick);
 
