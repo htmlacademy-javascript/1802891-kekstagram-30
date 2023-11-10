@@ -88,17 +88,24 @@ const sizeOption = {
 
 let valueInputScale = sizeOption.DEFAULT_SIZE;
 
+/**
+ * Функция для увиличения или ументшения фотографии
+ * @param {object} — Настройки контроллера
+ */
 const editSizePicture = ({ STEP_BACK, STEP_FORWARD, MIN_SIZE, MAX_SIZE }) => {
   let valueSize = '';
+
   scaleControlSmaller.addEventListener('click', () => {
     if (valueInputScale > MIN_SIZE) {
       valueInputScale -= STEP_BACK;
       scaleControlValue.value = `${valueInputScale}%`;
       imgUploadPreview.style.transform = `scale(${valueInputScale / 100 })`;
-      console.log(valueInputScale);
+    } else {
+      valueInputScale = MIN_SIZE;
+      imgUploadPreview.style.transform = `scale(${valueInputScale / 100 })`;
+      scaleControlValue.value = `${valueInputScale}%`;
     }
   });
-
   scaleControlValue.addEventListener('keydown', (evt) => {
     scaleControlValue.value = '';
     if(!(Number.isNaN(findNumbersAtString(evt.key))) & +valueSize <= 100){
@@ -107,17 +114,29 @@ const editSizePicture = ({ STEP_BACK, STEP_FORWARD, MIN_SIZE, MAX_SIZE }) => {
       scaleControlValue.value += `${valueSize}%`;
     }
   });
-
   scaleControlBigger.addEventListener('click', () => {
     if (valueInputScale < MAX_SIZE) {
       valueInputScale = +valueInputScale + STEP_FORWARD;
       scaleControlValue.value = `${valueInputScale}%`;
       imgUploadPreview.style.transform = `scale(${valueInputScale / 100 })`;
+    } else {
+      valueInputScale = MAX_SIZE;
+      imgUploadPreview.style.transform = `scale(${valueInputScale / 100 })`;
+      scaleControlValue.value = `${valueInputScale}%`;
     }
   });
 
   scaleControlValue.addEventListener('blur', () => {
     valueSize = '';
+
+    if (valueInputScale > MAX_SIZE) {
+      valueInputScale = MAX_SIZE;
+      scaleControlValue.value = `${valueInputScale}%`;
+    } else if (valueInputScale < MIN_SIZE) {
+      valueInputScale = MIN_SIZE;
+      scaleControlValue.value = `${valueInputScale}%`;
+    }
+
     imgUploadPreview.style.transform = `scale(${valueInputScale / 100 })`;
   });
 };

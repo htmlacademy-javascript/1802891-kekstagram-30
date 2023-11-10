@@ -44,7 +44,7 @@
             </fieldset>
 
             <!-- Форма редактирования изображения -->
-            <div class="img-upload__overlay ">
+            <div class="img-upload__overlay hidden">
               <div class="img-upload__wrapper">
                 <div class="img-upload__preview-container">
 
@@ -131,7 +131,9 @@
                     <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег">
                   </div>
                   <div class="img-upload__field-wrapper">
-                    <textarea class="text__description" name="description" placeholder="Ваш комментарий..."></textarea>
+                    <textarea class="text__description" name="description" placeholder="Ваш комментарий..."
+                      data-pristine-maxlength="140"
+                      data-pristine-maxlength-message="Комментарий не может быть длинее 140 символов"></textarea>
                   </div>
                 </fieldset>
 
@@ -252,6 +254,8 @@
       <h2 class="data-error__title">Не удалось загрузить данные</h2>
     </section>
   </template>
+
+  <script src="vendor/pristine/pristine.min.js"></script>
   <script src="vendor/nouislider/nouislider.js"></script>
   <script src="js/main.js" type="module"></script>
 </body>
