@@ -1,8 +1,7 @@
-import { resetSize as defaultSize, editSizePicture, sizeOption, init as innitEffect, reset as resetEffect } from './edit-form.js';
+import { resetZoom, initEffect, resetEffect } from './edit-upload-pictures.js';
 import {checkLengthString} from './utils.js';
-editSizePicture(sizeOption);
 
-let text = '';
+
 const MAX_LENGTH_HASHTAGS = 5;
 const VALID_HASHTAGS = /^#[а-яёa-z0-9]{1,19}$/i;
 const messageError = {
@@ -15,7 +14,6 @@ const body = document.querySelector('body');
 const imgUpload = body.querySelector('.img-upload');
 const form = document.querySelector('.img-upload__form');
 const inputHashtags = document.querySelector('.text__hashtags');
-const descriptionPicture = document.querySelector('.text__description');
 const imgUploadInput = imgUpload.querySelector('.img-upload__input');
 const imgUploadOverlay = imgUpload.querySelector('.img-upload__overlay');
 const imgUploadCancel = imgUpload.querySelector('.img-upload__cancel');
@@ -63,15 +61,10 @@ const hasUniqueTags = (value) => {
 
 
 inputHashtags.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Backspace' || evt.key === 'Shift') {
-    text += '';
-  } else {
-    text += evt.key;
-  }
-  checkValidHashtag(text);
-  checkLengthValidHashtag(text);
-  hasUniqueTags(text);
-  console.log(normalizeTags(text),normalizeTags(text).length);
+  checkValidHashtag(inputHashtags.value);
+  checkLengthValidHashtag(inputHashtags.value);
+  hasUniqueTags(inputHashtags.value);
+  evt.stopPropagation();
 });
 
 
@@ -79,11 +72,11 @@ const onClosedImgUploadKey = (evt) => {
   if (evt.key === 'Escape') {
     imgUploadOverlay.classList.add('hidden');
     body.classList.remove('modal-open');
-    defaultSize();
+    resetZoom();
   }
 };
 
-const showModal = (evt) => {
+const onShowModalClick = (evt) => {
   if (evt.target.files[0]) {
     imgUploadOverlay.classList.remove('hidden');
     body.classList.add('modal-open');
@@ -95,7 +88,7 @@ const onClosedImgUploadClick = () =>{
   imgUploadOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
   window.removeEventListener('keydown', onClosedImgUploadKey);
-  defaultSize();
+  resetZoom();
   resetEffect();
 };
 
@@ -121,7 +114,8 @@ pristine.addValidator(
   true
 );
 
-imgUploadInput.addEventListener('change', showModal);
+imgUploadInput.addEventListener('change', onShowModalClick);
 imgUploadCancel.addEventListener('click', onClosedImgUploadClick);
-innitEffect();
+imgUploadCancel.addEventListener('keydown', onClosedImgUploadKey);
+initEffect();
 
