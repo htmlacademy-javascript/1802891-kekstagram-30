@@ -16,7 +16,7 @@ const onClosedImgUploadKey = (evt) => {
   }
 };
 
-const onShowModalClick = (evt) => {
+const onShowImgUploadClick = (evt) => {
   if (evt.target.files[0]) {
     imgUploadOverlay.classList.remove('hidden');
     body.classList.add('modal-open');
@@ -32,8 +32,10 @@ const onClosedImgUploadClick = () =>{
   resetEffect();
 };
 
-imgUploadInput.addEventListener('change', onShowModalClick);
+imgUploadInput.addEventListener('change', onShowImgUploadClick);
 imgUploadCancel.addEventListener('click', onClosedImgUploadClick);
 imgUploadCancel.addEventListener('keydown', onClosedImgUploadKey);
 initEffect();
 editZoomPicture(ZoomOption);
+
+export { onClosedImgUploadClick };

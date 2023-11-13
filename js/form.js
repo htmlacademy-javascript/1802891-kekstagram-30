@@ -1,5 +1,6 @@
-import {checkLengthString} from './utils.js';
-
+import { checkLengthString } from './utils.js';
+import { postData } from './api.js';
+import { onClosedImgUploadClick } from './upload-Pictures-modal.js';
 
 const MAX_LENGTH_HASHTAGS = 5;
 const VALID_HASHTAGS = /^#[а-яёa-z0-9]{1,19}$/i;
@@ -8,9 +9,14 @@ const messageError = {
   LengthHashtags: `Максимум ${MAX_LENGTH_HASHTAGS} хэш-тегов`,
   HashtagsRepeats: 'хэш-теги повторяются',
 };
+const MessageButton = {
+  DEFAULT: 'Опубликовать',
+  SENDING: 'Публикуется',
+};
 
 const body = document.querySelector('body');
 const form = body.querySelector('.img-upload__form');
+const formSubmit = form.querySelector('.img-upload__submit');
 const inputHashtags = form.querySelector('.text__hashtags');
 
 
@@ -53,6 +59,23 @@ const hasUniqueTags = (value) => {
   const lowerCaseTags = normalizeTags(value).map((tag) => tag.toLowerCase());
   return lowerCaseTags.length === new Set (lowerCaseTags).size;
 };
+
+const blockSubmitButton = () => {
+  formSubmit.disabled = true;
+  formSubmit.textContent = MessageButton.SENDING;
+};
+const unblockSubmitButton = () => {
+  formSubmit.disabled = false;
+  formSubmit.textContent = MessageButton.DEFAULT;
+};
+
+form.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  const isValid = pristine.validate();
+  const fromData = new FormData(evt.target);
+  postData(isValid, fromData, onClosedImgUploadClick, blockSubmitButton, unblockSubmitButton);
+});
 
 
 inputHashtags.addEventListener('keydown', (evt) => {
