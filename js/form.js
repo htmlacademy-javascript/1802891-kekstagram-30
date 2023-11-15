@@ -1,6 +1,6 @@
 import { checkLengthString } from './utils.js';
 import { postData } from './api.js';
-import { onClosedImgUploadClick } from './upload-pictures-modal1.js';
+import { onClosedImgUploadClick } from './upload-pictures-modal.js';
 
 const MAX_LENGTH_HASHTAGS = 5;
 const VALID_HASHTAGS = /^#[а-яёa-z0-9]{1,19}$/i;
