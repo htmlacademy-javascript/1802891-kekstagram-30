@@ -1,4 +1,3 @@
-import { resetZoom, initEffect, resetEffect } from './edit-upload-pictures.js';
 import {checkLengthString} from './utils.js';
 
 
@@ -11,12 +10,8 @@ const messageError = {
 };
 
 const body = document.querySelector('body');
-const imgUpload = body.querySelector('.img-upload');
-const form = document.querySelector('.img-upload__form');
-const inputHashtags = document.querySelector('.text__hashtags');
-const imgUploadInput = imgUpload.querySelector('.img-upload__input');
-const imgUploadOverlay = imgUpload.querySelector('.img-upload__overlay');
-const imgUploadCancel = imgUpload.querySelector('.img-upload__cancel');
+const form = body.querySelector('.img-upload__form');
+const inputHashtags = form.querySelector('.text__hashtags');
 
 
 const pristine = new Pristine(form, {
@@ -67,31 +62,6 @@ inputHashtags.addEventListener('keydown', (evt) => {
   evt.stopPropagation();
 });
 
-
-const onClosedImgUploadKey = (evt) => {
-  if (evt.key === 'Escape') {
-    imgUploadOverlay.classList.add('hidden');
-    body.classList.remove('modal-open');
-    resetZoom();
-  }
-};
-
-const onShowModalClick = (evt) => {
-  if (evt.target.files[0]) {
-    imgUploadOverlay.classList.remove('hidden');
-    body.classList.add('modal-open');
-    window.addEventListener('keydown', onClosedImgUploadKey);
-  }
-};
-
-const onClosedImgUploadClick = () =>{
-  imgUploadOverlay.classList.add('hidden');
-  body.classList.remove('modal-open');
-  window.removeEventListener('keydown', onClosedImgUploadKey);
-  resetZoom();
-  resetEffect();
-};
-
 pristine.addValidator(
   inputHashtags,
   hasUniqueTags,
@@ -113,9 +83,3 @@ pristine.addValidator(
   1,
   true
 );
-
-imgUploadInput.addEventListener('change', onShowModalClick);
-imgUploadCancel.addEventListener('click', onClosedImgUploadClick);
-imgUploadCancel.addEventListener('keydown', onClosedImgUploadKey);
-initEffect();
-
