@@ -63,7 +63,7 @@ bigPictureClose.addEventListener('click', () => {
   commentsCountShown = 0;
 });
 
-window.addEventListener('keydown', (evt) => {
+document.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {
     bigPicture.classList.add('hidden');
     body.classList.remove('.modal-open');
@@ -71,7 +71,7 @@ window.addEventListener('keydown', (evt) => {
   }
 });
 
-const onCommentsLoaderClick = renderComments;
+const onCommentsLoaderClick = () => renderComments();
 
 commentsLoader.addEventListener('click', onCommentsLoaderClick);
 
