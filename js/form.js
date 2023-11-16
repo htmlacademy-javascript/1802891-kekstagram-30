@@ -85,24 +85,28 @@ inputHashtags.addEventListener('keydown', (evt) => {
   evt.stopPropagation();
 });
 
-pristine.addValidator(
-  inputHashtags,
-  hasUniqueTags,
-  messageError.HashtagsRepeats,
-  3,
-  true
-);
-pristine.addValidator(
-  inputHashtags,
-  checkLengthValidHashtag,
-  messageError.LengthHashtags,
-  2,
-  true
-);
-pristine.addValidator(
-  inputHashtags,
-  checkValidHashtag,
-  messageError.Hashtags,
-  1,
-  true
-);
+const checkValidateForm = () => {
+  pristine.addValidator(
+    inputHashtags,
+    hasUniqueTags,
+    messageError.HashtagsRepeats,
+    3,
+    true
+  );
+  pristine.addValidator(
+    inputHashtags,
+    checkLengthValidHashtag,
+    messageError.LengthHashtags,
+    2,
+    true
+  );
+  pristine.addValidator(
+    inputHashtags,
+    checkValidHashtag,
+    messageError.Hashtags,
+    1,
+    true
+  );
+};
+
+export { checkValidateForm };

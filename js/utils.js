@@ -1,3 +1,9 @@
+const body = document.querySelector('body');
+const templateSuccess = document.querySelector('#success').content.querySelector('.success');
+const templateSuccessClose = templateSuccess.querySelector('.success__button');
+const templateError = document.querySelector('#error').content.querySelector('.error');
+const templateErrorClose = templateError.querySelector('.error__button');
+const templateLoadError = document.querySelector('#data-error').content.querySelector('.data-error');
 /**
  * Считает длину строки
  * @param {string|int} — исходная строка или целое число
@@ -82,4 +88,25 @@ const calculatingTimeForMeeting = (beginningDay, endOfDay, beginningOfMeeting, d
   return true;
 };
 
-export {getRandomInteger, getRandomElementFromArray, checkLengthString, calculatingTimeForMeeting, isPalindrome, findNumbersAtString};
+const sendFormSuccess = () => {
+  body.append(templateSuccess);
+  templateSuccessClose.addEventListener('click', () => {
+    body.removeChild(templateSuccess);
+  });
+};
+
+const sendFormError = () => {
+  body.append(templateError);
+  templateErrorClose.addEventListener('click', () => {
+    body.removeChild(templateError);
+  });
+};
+
+const renderingPictureError = () => {
+  body.append(templateLoadError);
+  setTimeout(() => {
+    body.removeChild(templateLoadError);
+  }, 3000);
+};
+
+export { getRandomInteger, getRandomElementFromArray, checkLengthString, calculatingTimeForMeeting, isPalindrome, findNumbersAtString, sendFormSuccess, sendFormError, renderingPictureError };
