@@ -13,28 +13,28 @@ const onClosedImgUploadKey = (evt) => {
     imgUploadOverlay.classList.add('hidden');
     body.classList.remove('modal-open');
     resetZoom();
+    imgUploadInput.value = '';
   }
 };
 
-const onShowImgUploadClick = (evt) => {
-  if (evt.target.files[0]) {
-    imgUploadOverlay.classList.remove('hidden');
-    body.classList.add('modal-open');
-    window.addEventListener('keydown', onClosedImgUploadKey);
-  }
+const onShowImgUploadClick = () => {
+  imgUploadOverlay.classList.remove('hidden');
+  body.classList.add('modal-open');
+  document.addEventListener('keydown', onClosedImgUploadKey);
 };
 
-const onClosedImgUploadClick = () =>{
+const onClosedImgUploadClick = () => {
   imgUploadOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
-  window.removeEventListener('keydown', onClosedImgUploadKey);
+  document.removeEventListener('keydown', onClosedImgUploadKey);
   resetZoom();
   resetEffect();
+  imgUploadInput.value = '';
 };
 
 imgUploadInput.addEventListener('change', onShowImgUploadClick);
 imgUploadCancel.addEventListener('click', onClosedImgUploadClick);
-imgUploadCancel.addEventListener('keydown', onClosedImgUploadKey);
+document.addEventListener('keydown', onClosedImgUploadKey);
 initEffect();
 editZoomPicture(ZoomOption);
 
