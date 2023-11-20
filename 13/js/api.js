@@ -23,27 +23,28 @@ const getData = (method) => {
     });
 };
 
+
 const postData = (valid, sendData, closeModal, disabledButton, unblockButton) => {
   if (valid) {
     fetch(
-      URL,
+      'https://30.javascript.pages.academy/kekstagram/',
       {
         method: 'POST',
         body: sendData,
       },
+      disabledButton(),
     )
       .then((response) => {
-        disabledButton();
         if (response.ok) {
           closeModal();
-          sendFormError();
+          sendFormSuccess();
         } else {
           throw new Error();
         }
       })
       .catch(() => {
-        sendFormSuccess();
-        throw new Error(MessageError.ERROR_POST);
+        sendFormError();
+        //throw new Error(MessageError.ERROR_POST);
       })
       .finally(unblockButton);
   }

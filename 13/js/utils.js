@@ -4,6 +4,10 @@ const templateSuccessClose = templateSuccess.querySelector('.success__button');
 const templateError = document.querySelector('#error').content.querySelector('.error');
 const templateErrorClose = templateError.querySelector('.error__button');
 const templateLoadError = document.querySelector('#data-error').content.querySelector('.data-error');
+const cloneTemplateSuccess = templateSuccess;
+const cloneTemplateError = templateError;
+const cloneTemplateErrorRender = templateLoadError;
+
 /**
  * Считает длину строки
  * @param {string|int} — исходная строка или целое число
@@ -88,25 +92,76 @@ const calculatingTimeForMeeting = (beginningDay, endOfDay, beginningOfMeeting, d
   return true;
 };
 
+/**
+ * Функция для показа окна с успешной отправкой данных
+ */
 const sendFormSuccess = () => {
-  body.append(templateSuccess);
+  body.append(cloneTemplateSuccess);
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      cloneTemplateSuccess.remove();
+    }
+  });
   templateSuccessClose.addEventListener('click', () => {
-    body.removeChild(templateSuccess);
+    cloneTemplateSuccess.remove();
+  });
+  document.addEventListener('click', () => {
+    cloneTemplateSuccess.remove();
   });
 };
 
+/**
+ * Функция для показа окна с неуспешной отправкой данных
+ */
 const sendFormError = () => {
-  body.append(templateError);
+  body.append(cloneTemplateError);
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      cloneTemplateError.remove();
+      evt.stopPropagation();
+    }
+  });
   templateErrorClose.addEventListener('click', () => {
-    body.removeChild(templateError);
+    cloneTemplateError.remove();
+  });
+  document.addEventListener('click', () => {
+    cloneTemplateError.remove();
   });
 };
 
+/**
+ * Функция для показа ошибки загрузки фотографий
+ */
 const renderingPictureError = () => {
-  body.append(templateLoadError);
+  body.append(cloneTemplateErrorRender);
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      cloneTemplateErrorRender.remove();
+    }
+  });
+  document.addEventListener('click', () => {
+    cloneTemplateErrorRender.remove();
+  });
   setTimeout(() => {
-    body.removeChild(templateLoadError);
+    cloneTemplateErrorRender.remove();
   }, 3000);
 };
 
-export { getRandomInteger, getRandomElementFromArray, checkLengthString, calculatingTimeForMeeting, isPalindrome, findNumbersAtString, sendFormSuccess, sendFormError, renderingPictureError };
+
+/**
+ * Функция для устранения "дребезга"
+* @param {function} — 1 параметр принимает функцию "коллбэк"
+* @param {int} — 2 параметр принимает время через которое будет вызываться функция
+ * @return {void} — возвращает функцию вызову через определенное время
+ */
+function debounce (callback, timeoutDelay = 500) {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
+export { getRandomInteger, getRandomElementFromArray, checkLengthString, calculatingTimeForMeeting, isPalindrome, findNumbersAtString, sendFormSuccess, sendFormError, renderingPictureError, debounce };
