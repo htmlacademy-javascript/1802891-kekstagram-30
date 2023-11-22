@@ -23,7 +23,6 @@ const getData = (method) => {
     });
 };
 
-
 const postData = (valid, sendData, closeModal, disabledButton, unblockButton) => {
   if (valid) {
     fetch(
