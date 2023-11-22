@@ -1,12 +1,5 @@
 import {findNumbersAtString} from './utils.js';
 
-const body = document.querySelector('body');
-const imgUpload = body.querySelector('.img-upload');
-const scaleControlSmaller = imgUpload.querySelector('.scale__control--smaller');
-const scaleControlValue = imgUpload.querySelector('.scale__control--value');
-const scaleControlBigger = imgUpload.querySelector('.scale__control--bigger');
-const imgUploadPreview = imgUpload.querySelector('.img-upload__preview img');
-
 const ZoomOption = {
   STEP_BACK: 25,
   STEP_FORWARD: 25,
@@ -14,6 +7,13 @@ const ZoomOption = {
   MAX_SIZE: 100,
   DEFAULT_SIZE: 100,
 };
+
+const body = document.querySelector('body');
+const imgUpload = body.querySelector('.img-upload');
+const scaleControlSmaller = imgUpload.querySelector('.scale__control--smaller');
+const scaleControlValue = imgUpload.querySelector('.scale__control--value');
+const scaleControlBigger = imgUpload.querySelector('.scale__control--bigger');
+const imgUploadPreview = imgUpload.querySelector('.img-upload__preview img');
 
 let valueInputScale = ZoomOption.DEFAULT_SIZE;
 

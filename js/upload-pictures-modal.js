@@ -42,7 +42,6 @@ const onShowImgUploadClick = () => {
 const onClosedImgUploadClick = () => {
   imgUploadOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onClosedImgUploadKey);
   resetZoom();
   resetEffect();
   imgUploadInput.value = '';

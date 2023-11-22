@@ -19,12 +19,12 @@ const getData = (method) => {
     })
     .catch(() => {
       renderingPictureError();
-      throw new Error(MessageError.ERROR_GET);
+      // throw new Error(MessageError.ERROR_GET);
     });
 };
 
 
-const postData = (valid, sendData, closeModal, disabledButton, unblockButton) => {
+const postData = (valid, sendData, closeModal, disabledButton, unblockButton, form) => {
   if (valid) {
     fetch(
       'https://30.javascript.pages.academy/kekstagram/',
@@ -38,6 +38,7 @@ const postData = (valid, sendData, closeModal, disabledButton, unblockButton) =>
         if (response.ok) {
           closeModal();
           sendFormSuccess();
+          form.reset();
         } else {
           throw new Error();
         }
