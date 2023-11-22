@@ -37,11 +37,9 @@ const optionsRandomFilter = {
 };
 
 const render = (filter, data) => {
-  const filteredData = optionsRandomFilter[filter](data);
-  // console.log(filteredData);
-  // createElementPhotos(filteredData);
   cleanListPictures();
-  return filteredData;
+  const filteredData = optionsRandomFilter[filter](data);
+  createElementPhotos(filteredData);
 };
 
 const filteringPicture = (dataPictures) => {
@@ -57,8 +55,7 @@ const filteringPicture = (dataPictures) => {
       }
     }
 
-    const data = render(evt.target.id, dataPictures);
-    createElementPhotos(data);
+    render(evt.target.id, dataPictures);
     evt.target.classList.add('img-filters__button--active');
 
   });

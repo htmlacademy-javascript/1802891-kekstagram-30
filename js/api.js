@@ -24,7 +24,7 @@ const postData = (valid, sendData, closeModal, disabledButton, unblockButton, fo
 
   if (valid) {
     fetch(
-      'https://30.javascript.pages.academy/kekstagram/',
+      'https://30.javascrit.pages.academy/kekstagram/',
       {
         method: 'POST',
         body: sendData,
