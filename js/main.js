@@ -1,9 +1,7 @@
-import {createPhotos, COUNT_PICTURE} from './data.js';
-import {createElementPhotos} from './pictures.js';
-import './uploadPictures-modal.js';
+import { getData } from './api.js';
+import { checkValidateForm } from './form.js';
+import { filteringPicture } from './filters.js';
+import { debounce } from './utils.js';
 
-
-const listDataPictures = createPhotos(COUNT_PICTURE);
-createElementPhotos(listDataPictures);
-
-
+getData(debounce(filteringPicture, 500));
+checkValidateForm();

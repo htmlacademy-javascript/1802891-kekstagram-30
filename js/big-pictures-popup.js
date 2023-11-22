@@ -53,7 +53,7 @@ const showBigPicture = ({url, description, likes, comments}) => {
   bigPicture.querySelector('.social__comment-total-count').textContent = comments.length;
   containerComments = comments;
   bigPicture.classList.remove('hidden');
-  body.classList.add('.modal-open');
+  body.classList.add('modal-open');
   renderComments((comments));
 };
 
@@ -66,7 +66,7 @@ bigPictureClose.addEventListener('click', () => {
 document.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {
     bigPicture.classList.add('hidden');
-    body.classList.remove('.modal-open');
+    body.classList.remove('modal-open');
     commentsCountShown = 0;
   }
 });

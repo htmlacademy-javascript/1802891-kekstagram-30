@@ -1,4 +1,12 @@
-const EffectOptions = {
+const body = document.querySelector('body');
+const imgUpload = body.querySelector('.img-upload');
+const imgUploadPreview = imgUpload.querySelector('.img-upload__preview img');
+const imgUploadEffectLevel = document.querySelector('.img-upload__effect-level');
+const effectLevelSlider = imgUploadEffectLevel.querySelector('.effect-level__slider');
+const effectLevelValue = imgUploadEffectLevel.querySelector('.effect-level__value');
+const effectsList = document.querySelector('.effects__list');
+
+const effectOptions = {
   none: {
     min: 0,
     max: 100,
@@ -38,17 +46,7 @@ const EffectOptions = {
   },
 };
 
-const body = document.querySelector('body');
-const imgUpload = body.querySelector('.img-upload');
-const imgUploadPreview = imgUpload.querySelector('.img-upload__preview img');
-const imgUploadEffectLevel = document.querySelector('.img-upload__effect-level');
-const effectLevelSlider = imgUploadEffectLevel.querySelector('.effect-level__slider');
-const effectLevelValue = imgUploadEffectLevel.querySelector('.effect-level__value');
-const effectsList = document.querySelector('.effects__list');
-
-// Реализация слайдера с добавлением эффектов для изображения
-
-let chosenEffect = Object.keys(EffectOptions)[0];
+let chosenEffect = Object.keys(effectOptions)[0];
 
 const hideSlider = () => {
   imgUploadEffectLevel.classList.add('hidden');
@@ -68,7 +66,7 @@ const setImageStyle = () => {
   }
 
   const { value } = effectLevelValue;
-  const { style, unit } = EffectOptions[chosenEffect];
+  const { style, unit } = effectOptions[chosenEffect];
 
   if (unit === undefined) {
     imgUploadPreview.style.filter = `${style}(${value})`;
@@ -116,31 +114,31 @@ const updateSlider = ({ min, max, step }) => {
  * Функция показывает слайдер, обновялет данные слайдера и добавляет эффект
  */
 const setSlider = () => {
-  updateSlider(EffectOptions[chosenEffect]);
+  updateSlider(effectOptions[chosenEffect]);
   showSlider();
   setImageStyle();
 };
 
 const onEffectChange = (evt) => {
-  chosenEffect = evt.target.value;
-  setSlider();
+  if (evt.target.tagName === 'INPUT') {
+    chosenEffect = evt.target.value;
+    setSlider();
+  }
 };
 
 /**
  * Функция создает слайдер и добавляет события выбора эффекта
  */
 const initEffect = () => {
-  createSlider(EffectOptions[chosenEffect]);
+  createSlider(effectOptions[chosenEffect]);
   effectsList.addEventListener('click', onEffectChange);
 };
 
 /**
  * Функция сбрасывает все параметры слайдера
- * @param {} —
- * @return {} —
  */
 const resetEffect = () => {
-  chosenEffect = Object.keys(EffectOptions)[0];
+  chosenEffect = Object.keys(effectOptions)[0];
   setSlider();
   setImageStyle();
 };

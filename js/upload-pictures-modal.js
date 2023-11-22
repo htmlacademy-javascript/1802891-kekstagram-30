@@ -2,8 +2,12 @@ import { resetZoom, editZoomPicture, ZoomOption } from './zoom-picture.js';
 import { initEffect, resetEffect } from './edit-upload-pictures.js';
 import './form.js';
 
+const FILE_TYPES = ['jpg', 'png', 'jpeg', 'svg'];
+
 const body = document.querySelector('body');
 const imgUpload = body.querySelector('.img-upload');
+const effectsPreview = imgUpload.querySelectorAll('.effects__preview');
+const imgUploadPreview = imgUpload.querySelector('.img-upload__preview img');
 const imgUploadInput = imgUpload.querySelector('.img-upload__input');
 const imgUploadOverlay = imgUpload.querySelector('.img-upload__overlay');
 const imgUploadCancel = imgUpload.querySelector('.img-upload__cancel');
@@ -13,27 +17,41 @@ const onClosedImgUploadKey = (evt) => {
     imgUploadOverlay.classList.add('hidden');
     body.classList.remove('modal-open');
     resetZoom();
+    imgUploadInput.value = '';
   }
 };
 
-const onShowModalClick = (evt) => {
-  if (evt.target.files[0]) {
+const onShowImgUploadClick = () => {
+  const file = imgUploadInput.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+  if (matches) {
     imgUploadOverlay.classList.remove('hidden');
     body.classList.add('modal-open');
-    window.addEventListener('keydown', onClosedImgUploadKey);
+    imgUploadPreview.src = URL.createObjectURL(file);
+
+    for (let i = 0; i < effectsPreview.length; i++) {
+      effectsPreview[i].style.backgroundImage = '';
+      effectsPreview[i].style.backgroundImage = `url(${URL.createObjectURL(file)})`;
+    }
   }
 };
 
-const onClosedImgUploadClick = () =>{
+const onClosedImgUploadClick = () => {
   imgUploadOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
-  window.removeEventListener('keydown', onClosedImgUploadKey);
+  document.removeEventListener('keydown', onClosedImgUploadKey);
   resetZoom();
   resetEffect();
+  imgUploadInput.value = '';
 };
 
-imgUploadInput.addEventListener('change', onShowModalClick);
+imgUploadInput.addEventListener('change', onShowImgUploadClick);
 imgUploadCancel.addEventListener('click', onClosedImgUploadClick);
-imgUploadCancel.addEventListener('keydown', onClosedImgUploadKey);
+document.addEventListener('keydown', onClosedImgUploadKey);
 initEffect();
 editZoomPicture(ZoomOption);
+
+export { onClosedImgUploadClick };

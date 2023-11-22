@@ -1,5 +1,6 @@
-import {checkLengthString} from './utils.js';
-
+import { checkLengthString } from './utils.js';
+import { postData } from './api.js';
+import { onClosedImgUploadClick } from './upload-pictures-modal.js';
 
 const MAX_LENGTH_HASHTAGS = 5;
 const VALID_HASHTAGS = /^#[а-яёa-z0-9]{1,19}$/i;
@@ -8,10 +9,16 @@ const messageError = {
   LengthHashtags: `Максимум ${MAX_LENGTH_HASHTAGS} хэш-тегов`,
   HashtagsRepeats: 'хэш-теги повторяются',
 };
+const MessageButton = {
+  DEFAULT: 'Опубликовать',
+  SENDING: 'Публикуется',
+};
 
 const body = document.querySelector('body');
 const form = body.querySelector('.img-upload__form');
+const formSubmit = form.querySelector('.img-upload__submit');
 const inputHashtags = form.querySelector('.text__hashtags');
+const textareaComments = form.querySelector('.text__description');
 
 
 const pristine = new Pristine(form, {
@@ -54,6 +61,31 @@ const hasUniqueTags = (value) => {
   return lowerCaseTags.length === new Set (lowerCaseTags).size;
 };
 
+/**
+ * Функция для блокировки кнопки в форме
+ */
+const blockSubmitButton = () => {
+  formSubmit.disabled = true;
+  formSubmit.textContent = MessageButton.SENDING;
+};
+/**
+ * Функция для разблокировки кнопки в форме
+ */
+const unblockSubmitButton = () => {
+  formSubmit.disabled = false;
+  formSubmit.textContent = MessageButton.DEFAULT;
+};
+
+form.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  const isValid = pristine.validate();
+  const fromData = new FormData(evt.target);
+  postData(isValid, fromData, onClosedImgUploadClick, blockSubmitButton, unblockSubmitButton);
+
+  evt.target.reset();
+});
+
 
 inputHashtags.addEventListener('keydown', (evt) => {
   checkValidHashtag(inputHashtags.value);
@@ -62,24 +94,35 @@ inputHashtags.addEventListener('keydown', (evt) => {
   evt.stopPropagation();
 });
 
-pristine.addValidator(
-  inputHashtags,
-  hasUniqueTags,
-  messageError.HashtagsRepeats,
-  3,
-  true
-);
-pristine.addValidator(
-  inputHashtags,
-  checkLengthValidHashtag,
-  messageError.LengthHashtags,
-  2,
-  true
-);
-pristine.addValidator(
-  inputHashtags,
-  checkValidHashtag,
-  messageError.Hashtags,
-  1,
-  true
-);
+textareaComments.addEventListener('keydown', (evt) => {
+  evt.stopPropagation();
+});
+
+/**
+ * Функция для проверки введенных данных в форму
+ */
+const checkValidateForm = () => {
+  pristine.addValidator(
+    inputHashtags,
+    hasUniqueTags,
+    messageError.HashtagsRepeats,
+    3,
+    true
+  );
+  pristine.addValidator(
+    inputHashtags,
+    checkLengthValidHashtag,
+    messageError.LengthHashtags,
+    2,
+    true
+  );
+  pristine.addValidator(
+    inputHashtags,
+    checkValidHashtag,
+    messageError.Hashtags,
+    1,
+    true
+  );
+};
+
+export { checkValidateForm };
