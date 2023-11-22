@@ -1,10 +1,11 @@
 import { sendFormSuccess, sendFormError, renderingPictureError } from './utils.js';
-import { onClosedImgUploadKey } from "./upload-pictures-modal.js";
+import { onClosedImgUploadKey } from './upload-pictures-modal.js';
 
 const URL = 'https://30.javascript.pages.academy/kekstagram/';
 
 const getData = (method) => {
   fetch(`${URL}data`)
+
     .then((response) => {
       if (!response.ok) {
         throw new Error();
@@ -19,8 +20,8 @@ const getData = (method) => {
     });
 };
 
-
 const postData = (valid, sendData, closeModal, disabledButton, unblockButton, form) => {
+
   if (valid) {
     fetch(
       'https://30.javascript.pages.academy/kekstagram/',
