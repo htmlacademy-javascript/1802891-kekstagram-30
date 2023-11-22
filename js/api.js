@@ -20,6 +20,7 @@ const getData = (method) => {
     });
 };
 
+
 const postData = (valid, sendData, closeModal, disabledButton, unblockButton, form) => {
 
   if (valid) {
