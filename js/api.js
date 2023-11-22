@@ -1,13 +1,11 @@
 import { sendFormSuccess, sendFormError, renderingPictureError } from './utils.js';
+import { onClosedImgUploadKey } from './upload-pictures-modal.js';
 
 const URL = 'https://30.javascript.pages.academy/kekstagram/';
-const MessageError = {
-  ERROR_GET: 'Произошла ошибка загрузки фотографий',
-  ERROR_POST: 'Произошла ошибка отправки данных',
-};
 
 const getData = (method) => {
   fetch(`${URL}data`)
+
     .then((response) => {
       if (!response.ok) {
         throw new Error();
@@ -19,11 +17,12 @@ const getData = (method) => {
     })
     .catch(() => {
       renderingPictureError();
-      throw new Error(MessageError.ERROR_GET);
     });
 };
 
-const postData = (valid, sendData, closeModal, disabledButton, unblockButton) => {
+
+const postData = (valid, sendData, closeModal, disabledButton, unblockButton, form) => {
+
   if (valid) {
     fetch(
       'https://30.javascript.pages.academy/kekstagram/',
@@ -37,15 +36,17 @@ const postData = (valid, sendData, closeModal, disabledButton, unblockButton) =>
         if (response.ok) {
           closeModal();
           sendFormSuccess();
+          form.reset();
+
         } else {
           throw new Error();
         }
       })
       .catch(() => {
+        document.removeEventListener('keydown', onClosedImgUploadKey);
         sendFormError();
-        //throw new Error(MessageError.ERROR_POST);
       })
-      .finally(unblockButton);
+      .finally(unblockButton, document.addEventListener('keydown', onClosedImgUploadKey));
   }
 };
 

@@ -42,7 +42,6 @@ const onShowImgUploadClick = () => {
 const onClosedImgUploadClick = () => {
   imgUploadOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onClosedImgUploadKey);
   resetZoom();
   resetEffect();
   imgUploadInput.value = '';
@@ -54,4 +53,4 @@ document.addEventListener('keydown', onClosedImgUploadKey);
 initEffect();
 editZoomPicture(ZoomOption);
 
-export { onClosedImgUploadClick };
+export { onClosedImgUploadClick, onClosedImgUploadKey };

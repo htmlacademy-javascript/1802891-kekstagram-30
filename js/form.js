@@ -24,7 +24,7 @@ const textareaComments = form.querySelector('.text__description');
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
-  errorTextClass: 'img-upload__field-wrapper__error',
+  errorTextClass: 'img-upload__field-wrapper--error',
 });
 
 /**
@@ -81,9 +81,7 @@ form.addEventListener('submit', (evt) => {
 
   const isValid = pristine.validate();
   const fromData = new FormData(evt.target);
-  postData(isValid, fromData, onClosedImgUploadClick, blockSubmitButton, unblockSubmitButton);
-
-  evt.target.reset();
+  postData(isValid, fromData, onClosedImgUploadClick, blockSubmitButton, unblockSubmitButton, form);
 });
 
 
