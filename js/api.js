@@ -1,6 +1,7 @@
 import { sendFormSuccess, sendFormError, renderingPictureError } from './utils.js';
 
 const URL = 'https://30.javascript.pages.academy/kekstagram/';
+
 const MessageError = {
   ERROR_GET: 'Произошла ошибка загрузки фотографий',
   ERROR_POST: 'Произошла ошибка отправки данных',
@@ -8,6 +9,7 @@ const MessageError = {
 
 const getData = (method) => {
   fetch(`${URL}data`)
+
     .then((response) => {
       if (!response.ok) {
         throw new Error();
@@ -23,8 +25,8 @@ const getData = (method) => {
     });
 };
 
-
 const postData = (valid, sendData, closeModal, disabledButton, unblockButton, form) => {
+
   if (valid) {
     fetch(
       'https://30.javascript.pages.academy/kekstagram/',
