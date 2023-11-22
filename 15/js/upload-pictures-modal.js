@@ -53,4 +53,4 @@ document.addEventListener('keydown', onClosedImgUploadKey);
 initEffect();
 editZoomPicture(ZoomOption);
 
-export { onClosedImgUploadClick };
+export { onClosedImgUploadClick, onClosedImgUploadKey };
