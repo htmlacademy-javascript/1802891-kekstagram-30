@@ -60,7 +60,7 @@ const showBigPicture = ({url, description, likes, comments}) => {
 
 bigPictureClose.addEventListener('click', () => {
   bigPicture.classList.add('hidden');
-  body.classList.remove('.modal-open');
+  body.classList.remove('modal-open');
   commentsCountShown = 0;
 });
 
