@@ -1,3 +1,5 @@
+const timeClosePopupError = 3000;
+
 const body = document.querySelector('body');
 const templateSuccess = document.querySelector('#success').content.querySelector('.success');
 const templateSuccessClose = templateSuccess.querySelector('.success__button');
@@ -82,7 +84,8 @@ const calculatingTimeForMeeting = (beginningDay, endOfDay, beginningOfMeeting, d
     }
     return parseFloat(timeValue);
   };
-  const timeMeeting = parseFloat(durationOfMeeting / 60);
+  const hour = 60;
+  const timeMeeting = parseFloat(durationOfMeeting / hour);
   const startDay = timeConversion(beginningDay);
   const endDay = timeConversion(endOfDay);
   const startMeeting = timeConversion(beginningOfMeeting);
@@ -144,7 +147,7 @@ const renderingPictureError = () => {
   });
   setTimeout(() => {
     cloneTemplateErrorRender.remove();
-  }, 3000);
+  }, timeClosePopupError);
 };
 
 
@@ -161,6 +164,27 @@ function debounce (callback, timeoutDelay = 500) {
     clearTimeout(timeoutId);
 
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+/**
+ * Функция для пропуска кадров:
+ * @param { function } —  функция для пропуска кадров
+ * @param { int } —  время пропуска
+ * @return { function } — возвращает вункцию с задержкой
+ */
+function throttle (callback, delayBetweenFrames) {
+  let lastTime = 0;
+
+  return (...rest) => {
+    const now = new Date();
+
+    // Если время между кадрами больше задержки,
+    // вызываем наш колбэк и перезаписываем lastTime
+    // временем "последнего кадра"
+    if (now - lastTime >= delayBetweenFrames) {
+      callback.apply(this, rest);
+      lastTime = now;
+    }
   };
 }
 
