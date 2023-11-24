@@ -58,6 +58,7 @@ const filteringPicture = (dataPictures) => {
 
     render(evt.target.id, dataPictures);
     evt.target.classList.add('img-filters__button--active');
+
   }), TIME_CALL);
 };
 
