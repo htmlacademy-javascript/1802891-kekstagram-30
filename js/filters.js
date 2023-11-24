@@ -30,7 +30,6 @@ const optionsRandomFilter = {
     }
 
     return randomIndexList;
-    // randomIndexList.length = 0;
   },
   'filter-discussed': (data) => {
     const dataSortComments = data.slice().sort((pictureA, pictureB) => pictureB.comments.length - pictureA.comments.length);

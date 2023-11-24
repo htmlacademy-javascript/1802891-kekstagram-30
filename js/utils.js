@@ -1,4 +1,4 @@
-const timeClosePopupError = 3000;
+const TIME_CLOSE_POPUP_ERROR = 3000;
 
 const body = document.querySelector('body');
 const templateSuccess = document.querySelector('#success').content.querySelector('.success');
@@ -147,7 +147,7 @@ const renderingPictureError = () => {
   });
   setTimeout(() => {
     cloneTemplateErrorRender.remove();
-  }, timeClosePopupError);
+  }, TIME_CLOSE_POPUP_ERROR);
 };
 
 
@@ -166,11 +166,5 @@ function debounce (callback, timeoutDelay = 500) {
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
 }
-/**
- * Функция для пропуска кадров:
- * @param { function } —  функция для пропуска кадров
- * @param { int } —  время пропуска
- * @return { function } — возвращает вункцию с задержкой
- */
 
 export { getRandomInteger, getRandomElementFromArray, checkLengthString, calculatingTimeForMeeting, isPalindrome, findNumbersAtString, sendFormSuccess, sendFormError, renderingPictureError, debounce };
