@@ -44,18 +44,6 @@ const render = (filter, data) => {
   createElementPhotos(filteredData);
 };
 
-const onSwitchingFilterClick = (evt, data) => {
-  evt.preventDefault();
-  for (let i = 0; i < imgFiltersButton.length; i++) {
-    if (imgFiltersButton[i].closest('.img-filters__button--active')) {
-      imgFiltersButton[i].classList.remove('img-filters__button--active');
-    }
-  }
-
-  render(evt.target.id, data);
-  evt.target.classList.add('img-filters__button--active');
-};
-
 const filteringPicture = (dataPictures) => {
   imgFilters.classList.remove('img-filters--inactive');
   createElementPhotos(dataPictures);
