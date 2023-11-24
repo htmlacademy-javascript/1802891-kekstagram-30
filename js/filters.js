@@ -30,7 +30,6 @@ const optionsRandomFilter = {
     }
 
     return randomIndexList;
-    // randomIndexList.length = 0;
   },
   'filter-discussed': (data) => {
     const dataSortComments = data.slice().sort((pictureA, pictureB) => pictureB.comments.length - pictureA.comments.length);
@@ -42,18 +41,6 @@ const render = (filter, data) => {
   cleanListPictures();
   const filteredData = optionsRandomFilter[filter](data);
   createElementPhotos(filteredData);
-};
-
-const onSwitchingFilterClick = (evt, data) => {
-  evt.preventDefault();
-  for (let i = 0; i < imgFiltersButton.length; i++) {
-    if (imgFiltersButton[i].closest('.img-filters__button--active')) {
-      imgFiltersButton[i].classList.remove('img-filters__button--active');
-    }
-  }
-
-  render(evt.target.id, data);
-  evt.target.classList.add('img-filters__button--active');
 };
 
 const filteringPicture = (dataPictures) => {
@@ -70,6 +57,7 @@ const filteringPicture = (dataPictures) => {
 
     render(evt.target.id, dataPictures);
     evt.target.classList.add('img-filters__button--active');
+
   }), TIME_CALL);
 };
 
