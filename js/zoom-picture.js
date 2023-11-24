@@ -52,7 +52,7 @@ const editZoomPicture = (option) => {
   });
   scaleControlValue.addEventListener('keydown', (evt) => {
     scaleControlValue.value = '';
-    if(!(Number.isNaN(findNumbersAtString(evt.key))) & +valueSize <= 100){
+    if(!(Number.isNaN(findNumbersAtString(evt.key))) & +valueSize <= ZoomOption.DEFAULT_SIZE){
       valueSize += evt.key;
       valueInputScale = valueSize;
       scaleControlValue.value += `${valueSize}%`;
