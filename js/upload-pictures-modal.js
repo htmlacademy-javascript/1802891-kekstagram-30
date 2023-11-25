@@ -12,7 +12,8 @@ const imgUploadInput = imgUpload.querySelector('.img-upload__input');
 const imgUploadOverlay = imgUpload.querySelector('.img-upload__overlay');
 const imgUploadCancel = imgUpload.querySelector('.img-upload__cancel');
 
-const onClosedImgUploadKey = (evt) => {
+const onClosedImgUploadKeydown = (evt) => {
+
   if (evt.key === 'Escape') {
     imgUploadOverlay.classList.add('hidden');
     body.classList.remove('modal-open');
@@ -21,7 +22,8 @@ const onClosedImgUploadKey = (evt) => {
   }
 };
 
-const onShowImgUploadClick = () => {
+const onShowImgUploadChange = () => {
+
   const file = imgUploadInput.files[0];
   const fileName = file.name.toLowerCase();
 
@@ -47,10 +49,10 @@ const onClosedImgUploadClick = () => {
   imgUploadInput.value = '';
 };
 
-imgUploadInput.addEventListener('change', onShowImgUploadClick);
+imgUploadInput.addEventListener('change', onShowImgUploadChange);
 imgUploadCancel.addEventListener('click', onClosedImgUploadClick);
-document.addEventListener('keydown', onClosedImgUploadKey);
+document.addEventListener('keydown', onClosedImgUploadKeydown);
 initEffect();
 editZoomPicture(ZoomOption);
 
-export { onClosedImgUploadClick, onClosedImgUploadKey };
+export { onClosedImgUploadClick, onClosedImgUploadKeydown as onClosedImgUploadKey };

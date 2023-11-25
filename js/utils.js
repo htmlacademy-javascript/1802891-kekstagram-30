@@ -89,7 +89,9 @@ const calculatingTimeForMeeting = (beginningDay, endOfDay, beginningOfMeeting, d
   const startDay = timeConversion(beginningDay);
   const endDay = timeConversion(endOfDay);
   const startMeeting = timeConversion(beginningOfMeeting);
-  if (startDay > startMeeting || (startMeeting + timeMeeting) > endDay) {
+  if (startDay > startMeeting){
+    return false;
+  } else if (startMeeting + timeMeeting > endDay) {
     return false;
   }
   return true;
@@ -166,5 +168,4 @@ function debounce (callback, timeoutDelay = 500) {
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
 }
-
 export { getRandomInteger, getRandomElementFromArray, checkLengthString, calculatingTimeForMeeting, isPalindrome, findNumbersAtString, sendFormSuccess, sendFormError, renderingPictureError, debounce };

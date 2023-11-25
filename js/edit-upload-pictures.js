@@ -119,7 +119,7 @@ const setSlider = () => {
   setImageStyle();
 };
 
-const onEffectChange = (evt) => {
+const onEffectClick = (evt) => {
   if (evt.target.tagName === 'INPUT') {
     chosenEffect = evt.target.value;
     setSlider();
@@ -131,7 +131,7 @@ const onEffectChange = (evt) => {
  */
 const initEffect = () => {
   createSlider(effectOptions[chosenEffect]);
-  effectsList.addEventListener('click', onEffectChange);
+  effectsList.addEventListener('click', onEffectClick);
 };
 
 /**

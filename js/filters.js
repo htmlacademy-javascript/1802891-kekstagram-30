@@ -20,16 +20,15 @@ const cleanListPictures = () => {
 const optionsRandomFilter = {
   'filter-default': (data) => data,
   'filter-random': (data) => {
-    const randomIndexList = [];
+    const listRandomPictures = [];
 
-    while (randomIndexList.length < QUANTITY_RANDOM_PICTURE) {
+    while (listRandomPictures.length < QUANTITY_RANDOM_PICTURE) {
       const index = getRandomElementFromArray(data);
-      if (!randomIndexList.includes(index)) {
-        randomIndexList.push(index);
+      if (!listRandomPictures.includes(index)) {
+        listRandomPictures.push(index);
       }
     }
-
-    return randomIndexList;
+    return listRandomPictures;
   },
   'filter-discussed': (data) => {
     const dataSortComments = data.slice().sort((pictureA, pictureB) => pictureB.comments.length - pictureA.comments.length);

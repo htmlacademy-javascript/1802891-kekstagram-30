@@ -4,10 +4,12 @@ import { onClosedImgUploadClick } from './upload-pictures-modal.js';
 
 const MAX_LENGTH_HASHTAGS = 5;
 const VALID_HASHTAGS = /^#[а-яёa-z0-9]{1,19}$/i;
-const messageError = {
-  Hashtags: 'введён невалидный хэш-тег',
-  LengthHashtags: `Максимум ${MAX_LENGTH_HASHTAGS} хэш-тегов`,
-  HashtagsRepeats: 'хэш-теги повторяются',
+
+const MessageError = {
+  HASHTAGS: 'введён невалидный хэш-тег',
+  LENGTH_HASHTAGS: `Максимум ${MAX_LENGTH_HASHTAGS} хэш-тегов`,
+  HASHTAGS_REPEATS: 'хэш-теги повторяются',
+
 };
 const MessageButton = {
   DEFAULT: 'Опубликовать',
@@ -103,21 +105,21 @@ const checkValidateForm = () => {
   pristine.addValidator(
     inputHashtags,
     hasUniqueTags,
-    messageError.HashtagsRepeats,
+    MessageError.HASHTAGS_REPEATS,
     3,
     true
   );
   pristine.addValidator(
     inputHashtags,
     checkLengthValidHashtag,
-    messageError.LengthHashtags,
+    MessageError.LENGTH_HASHTAGS,
     2,
     true
   );
   pristine.addValidator(
     inputHashtags,
     checkValidHashtag,
-    messageError.Hashtags,
+    MessageError.HASHTAGS,
     1,
     true
   );
