@@ -60,7 +60,7 @@ const getRandomElementFromArray = (elements) => elements[getRandomInteger(0, ele
  * @return {boolean} — возвращает рандомный элемент из массива
  */
 const calculatingTimeForMeeting = (beginningDay, endOfDay, beginningOfMeeting, durationOfMeeting) => {
-  const timeСonversion = (time) => {
+  const timeConversion = (time) => {
     time.toString();
     let timeValue = '';
     for (let i = 0; i <= time.length - 1; i++) {
@@ -72,14 +72,14 @@ const calculatingTimeForMeeting = (beginningDay, endOfDay, beginningOfMeeting, d
     }
     return parseFloat(timeValue);
   };
-  const timeMeeting = parseFloat(durationOfMeeting / 60);
-  const startDay = timeСonversion(beginningDay);
-  const endDay = timeСonversion(endOfDay);
-  const startMeeting = timeСonversion(beginningOfMeeting);
-  if (startDay > startMeeting) {
+  const hour = 60;
+  const timeMeeting = parseFloat(durationOfMeeting / hour);
+  const startDay = timeConversion(beginningDay);
+  const endDay = timeConversion(endOfDay);
+  const startMeeting = timeConversion(beginningOfMeeting);
+  if (startDay > startMeeting){
     return false;
-
-  } else if ((startMeeting + timeMeeting) > endDay) {
+  } else if (startMeeting + timeMeeting > endDay) {
     return false;
   }
   return true;
