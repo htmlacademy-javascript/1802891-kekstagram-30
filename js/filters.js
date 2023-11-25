@@ -28,9 +28,7 @@ const optionsRandomFilter = {
         listRandomPictures.push(index);
       }
     }
-
     return listRandomPictures;
-
   },
   'filter-discussed': (data) => {
     const dataSortComments = data.slice().sort((pictureA, pictureB) => pictureB.comments.length - pictureA.comments.length);
@@ -58,6 +56,7 @@ const filteringPicture = (dataPictures) => {
 
     render(evt.target.id, dataPictures);
     evt.target.classList.add('img-filters__button--active');
+
   }), TIME_CALL);
 };
 
