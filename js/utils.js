@@ -1,9 +1,21 @@
+const timeClosePopupError = 3000;
+
+const body = document.querySelector('body');
+const templateSuccess = document.querySelector('#success').content.querySelector('.success');
+const templateSuccessClose = templateSuccess.querySelector('.success__button');
+const templateError = document.querySelector('#error').content.querySelector('.error');
+const templateErrorClose = templateError.querySelector('.error__button');
+const templateLoadError = document.querySelector('#data-error').content.querySelector('.data-error');
+const cloneTemplateSuccess = templateSuccess;
+const cloneTemplateError = templateError;
+const cloneTemplateErrorRender = templateLoadError;
+
 /**
  * Считает длину строки
  * @param {string|int} — исходная строка или целое число
  * @return {boolean} — правду или ложь
  */
-const cheakLengthString = (string, length) => string.length <= length;
+const checkLengthString = (string, length) => string.length <= length;
 
 /**
  * проверяет строку на палиндром
@@ -56,7 +68,7 @@ const getRandomElementFromArray = (elements) => elements[getRandomInteger(0, ele
 
 /**
  * функция для проверки возможности встречи
- * @param {stirng | number} — время начала дня, время окончание дня, время начала мероприятия, продолжительности меропрития
+ * @param {string | number} — время начала дня, время окончание дня, время начала мероприятия, продолжительности меропрития
  * @return {boolean} — возвращает рандомный элемент из массива
  */
 const calculatingTimeForMeeting = (beginningDay, endOfDay, beginningOfMeeting, durationOfMeeting) => {
@@ -85,4 +97,77 @@ const calculatingTimeForMeeting = (beginningDay, endOfDay, beginningOfMeeting, d
   return true;
 };
 
-export {getRandomInteger, getRandomElementFromArray};
+/**
+ * Функция для показа окна с успешной отправкой данных
+ */
+const sendFormSuccess = () => {
+  body.append(cloneTemplateSuccess);
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      cloneTemplateSuccess.remove();
+    }
+  });
+  templateSuccessClose.addEventListener('click', () => {
+    cloneTemplateSuccess.remove();
+  });
+  document.addEventListener('click', () => {
+    cloneTemplateSuccess.remove();
+  });
+};
+
+/**
+ * Функция для показа окна с неуспешной отправкой данных
+ */
+const sendFormError = () => {
+  body.append(cloneTemplateError);
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      cloneTemplateError.remove();
+      evt.stopPropagation();
+    }
+  });
+  templateErrorClose.addEventListener('click', () => {
+    cloneTemplateError.remove();
+  });
+  document.addEventListener('click', () => {
+    cloneTemplateError.remove();
+  });
+};
+
+/**
+ * Функция для показа ошибки загрузки фотографий
+ */
+const renderingPictureError = () => {
+  body.append(cloneTemplateErrorRender);
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      cloneTemplateErrorRender.remove();
+    }
+  });
+  document.addEventListener('click', () => {
+    cloneTemplateErrorRender.remove();
+  });
+  setTimeout(() => {
+    cloneTemplateErrorRender.remove();
+  }, timeClosePopupError);
+};
+
+
+/**
+ * Функция для устранения "дребезга"
+* @param {function} — 1 параметр принимает функцию "коллбэк"
+* @param {int} — 2 параметр принимает время через которое будет вызываться функция
+ * @return {void} — возвращает функцию вызову через определенное время
+ */
+function debounce (callback, timeoutDelay = 500) {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
+
+export { getRandomInteger, getRandomElementFromArray, checkLengthString, calculatingTimeForMeeting, isPalindrome, findNumbersAtString, sendFormSuccess, sendFormError, renderingPictureError, debounce };

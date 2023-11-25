@@ -13,6 +13,7 @@ const imgUploadOverlay = imgUpload.querySelector('.img-upload__overlay');
 const imgUploadCancel = imgUpload.querySelector('.img-upload__cancel');
 
 const onClosedImgUploadKeydown = (evt) => {
+
   if (evt.key === 'Escape') {
     imgUploadOverlay.classList.add('hidden');
     body.classList.remove('modal-open');
@@ -22,6 +23,7 @@ const onClosedImgUploadKeydown = (evt) => {
 };
 
 const onShowImgUploadChange = () => {
+
   const file = imgUploadInput.files[0];
   const fileName = file.name.toLowerCase();
 

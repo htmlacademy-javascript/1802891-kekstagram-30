@@ -4,10 +4,12 @@ import { onClosedImgUploadClick } from './upload-pictures-modal.js';
 
 const MAX_LENGTH_HASHTAGS = 5;
 const VALID_HASHTAGS = /^#[а-яёa-z0-9]{1,19}$/i;
+
 const MessageError = {
   HASHTAGS: 'введён невалидный хэш-тег',
   LENGTH_HASHTAGS: `Максимум ${MAX_LENGTH_HASHTAGS} хэш-тегов`,
   HASHTAGS_REPEATS: 'хэш-теги повторяются',
+
 };
 const MessageButton = {
   DEFAULT: 'Опубликовать',
