@@ -36,8 +36,6 @@ const stepZoom = (stepDirection) => {
 
   imgUploadPreview.style.transform = `scale(${valueInputScale / 100 })`;
   scaleControlValue.value = `${valueInputScale}%`;
-
-  // return valueInputScale;
 };
 
 /**
